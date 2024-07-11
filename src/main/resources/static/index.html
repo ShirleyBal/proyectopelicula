@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <header class="px-4 py-2 bgRojo text-white sticky-md-top">
+        <nav class="d-flex justify-content-between align-items-center">
+            <a href="index.html" class="d-flex align-items-center linksSinDecoration linkAnimado">
+                <span class="material-symbols-outlined">theaters</span>
+                <span>CAC - Movies</span>
+            </a>
+
+            <div class="links">
+                <ul class="d-flex flew-row align-items-center">
+                    <li class="mx-3"><a href="">Tendencias</a></li>
+                    <li class="mx-3">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropRegistro">Registrarse</a>
+                    </li>
+                    <li class="mx-3">
+                        <a href=""
+                            class="d-flex align-items-center btn btn-outline-warning"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdropLogin">
+                            <span class="material-symbols-outlined mx-1">input</span>
+                            <span>Iniciar Sesión</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <section>
+        <div id="banner" class="d-flex flex-column justify-content-center align-items-center text-white">
+            <h1>Películas y series ilimitadas y mucho más.</h1>
+            <h2>Disfruta donde quieras. Cancela cuando quieras.</h2>
+        </div>
+    </section>
+
+    <!-- Buscador -->
+    <section id="busqueda" class="bg-dark text-white d-flex flex-column justify-content-center align-items-center">
+        <h1 class="mb-3">¿Qué estás buscando para ver?</h1>
+        <input type="text" name="pelicula" id="pelicula"
+            class="form-control w-50 rounded-4 bg-dark text-white" placeholder="Buscar...">
+    </section>
+
+    <!-- Las tendencias de hoy -->
+    <section id="tendencias" class="bg-dark p-4">
+        <h3 class="text-white text-center p-4">Las tendencias de hoy</h3>
+        <div class="d-flex gap-5 justify-content-around flex-wrap mx-4 bgAzul" id="peliculas">
+            <!-- Aquí se insertarán las portadas de las películas -->
+        </div>
+    </section>
+
+    <!-- Las más aclamadas -->
+    <section>
+
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-dark text-white text-center p-4">
+        <ul class="d-flex justify-content-center">
+            <li><a href="">Términos y condiciones</a></li>
+            <li><a href="">Preguntas frecuentes</a></li>
+            <li><a href="">Ayuda</a></li>
+            <li><a href="">Administración películas</a></li>
+            <li><a href="pelis.html">Administrar</a></li>
+        </ul>
+    </footer>
+    
+    <!-- Modal Registro -->
+    <div class="modal fade" id="staticBackdropRegistro" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Registro de Usuario</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="server/checkRegistro.html" method="post">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control bg-dark" name="nombre" id="fnombre" required>
+                            <label for="fnombre">Nombre</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="apellido" id="fape" required>
+                            <label for="fape">Apellido</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="email" id="femail" required>
+                            <label for="femail">Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" name="password" id="fpass" required>
+                            <label for="fpass">Contraseña</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Acepto términos y condiciones
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Registrarse" class="btn btn-danger text-white">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="staticBackdropLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog bg-dark">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Login de Usuario</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="server/checkLogin.html" method="post">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="email" id="email" required
+                                onkeyup="noDisabled()">
+                            <label for="pass">Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" name="password" id="pass" required
+                                onkeyup="noDisabled()">
+                            <label for="pass">Contraseña</label>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Iniciar Sesión" id="btnSubmit" class="btn btn-primary disabled">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom JS -->
+    <script src="index.js"></script>
+</body>
+
+</html>
