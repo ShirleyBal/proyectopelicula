@@ -4,27 +4,23 @@ const options = {
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYTJjYTAwZDYxZWIzOTEyYjZlNzc4MDA4YWQ3ZmNjOCIsInN1YiI6IjYyODJmNmYwMTQ5NTY1MDA2NmI1NjlhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4MJSPDJhhpbHHJyNYBtH_uCZh4o0e3xGhZpcBIDy-Y8'
     }
-  };
-  
-  //TRAER PELIS:
+};
 
+// TRAER PELIS:
 function getPelis() {
-    const respuesta = fetch(`http://localhost:8080/peliculas/getAllMovies`);
-  
-  //2 invocar
-    respuesta
+    fetch('http://localhost:8080/peliculas/getAllMovies', options)
         .then(response => response.json())
-        .then(response => renderPelis(response))//fulfilled
-        .catch(error => dibujarError('Error al obtener peliculas: ',error))//rejected
+        .then(response => renderPelis(response))
+        .catch(error => dibujarError('Error al obtener peliculas: ' + error));
 }
-  
+
 function renderPelis(peliculas) {
     const peliculasTable = document.getElementById('peliculas');
-    peliculasTable.innerHTML = ''; //limpiamos contenido anterior de la tabla
+    peliculasTable.innerHTML = ''; // Limpiamos contenido anterior de la tabla
   
-    //Iterar sobre las pelis
+    // Iterar sobre las pelis
     let rows = '';
-    for(let peli of peliculas) {
+    for (let peli of peliculas) {
         rows += `
          <tr>
             <td>${peli.titulo}</td>
@@ -43,24 +39,35 @@ function renderPelis(peliculas) {
         </tr>
         `;
     }
-    document.querySelector('#peliculas').innerHTML = rows;
+    peliculasTable.innerHTML = rows;
 }
 
 function delPeli(id) {
-      const respuesta = fetch(`http://localhost:8080/peliculas/delete/${id}`, {
+    fetch(`http://localhost:8080/peliculas/delete/${id}`, {
         method: 'DELETE',
-      });
-  
-      respuesta
-          .then(response => DeleteOK(response))//fulfilled
-          .catch(error => dibujarError(error))//rejected
+    })
+    .then(response => {
+        if (response.ok) {
+            mostrarMensaje('Pelicula eliminada', 'success');
+            getPelis(); // Actualiza la lista de películas
+        } else {
+            mostrarMensaje('Error eliminando la película', 'danger');
+        }
+    })
+    .catch(error => mostrarMensaje('Error al eliminar película: ' + error, 'danger'));
 }
 
-function DeleteOK(response) {
-  document.querySelector('#peliculas').innerHTML = "Se eliminó exitosamente";
+function mostrarMensaje(mensaje, tipo) {
+    const mensajeDiv = document.getElementById('mensaje');
+    mensajeDiv.textContent = mensaje;
+    mensajeDiv.className = 'alert alert-' + tipo;
+    mensajeDiv.style.display = 'block';
+    setTimeout(() => {
+        mensajeDiv.style.display = 'none';
+    }, 3000); // Ocultar el mensaje después de 3 segundos
 }
 
 function dibujarError(error) {
-  document.querySelector('#peliculas').innerHTML = error;
+    const peliculasTable = document.getElementById('peliculas');
+    peliculasTable.innerHTML = '<tr><td colspan="7" class="text-danger">' + error + '</td></tr>';
 }
-

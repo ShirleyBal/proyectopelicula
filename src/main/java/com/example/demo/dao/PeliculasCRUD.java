@@ -14,24 +14,23 @@ public class PeliculasCRUD {
     static String url = "jdbc:postgresql://localhost:5432/java24119";
     static String user = "postgres";
     static String password = "Qwerty1997";
-
     public List<Pelicula> listar() {
-        String sql = "SELECT * FROM pelicula";
+        String sql = "SELECT id, titulo, anio, puntuacion, portada, tipo, categoria FROM pelicula";
         List<Pelicula> listPeli = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
-
+    
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("id");  // Incluimos el id en la lectura de resultados
                 String titulo = resultSet.getString("titulo");
                 int anio = resultSet.getInt("anio");
                 int puntuacion = resultSet.getInt("puntuacion");
                 String portada = resultSet.getString("portada");
                 String tipo = resultSet.getString("tipo");
-                int categoria_id = resultSet.getInt("categoria_id");
-
-                Pelicula pelicula = new Pelicula(id, titulo, anio, puntuacion, portada, tipo, categoria_id);
+                String categoria = resultSet.getString("categoria");
+    
+                Pelicula pelicula = new Pelicula(id, titulo, anio, puntuacion, portada, tipo, categoria);  // Pasamos el id al constructor de Pelicula
                 listPeli.add(pelicula);
             }
         } catch (SQLException e) {
@@ -39,18 +38,16 @@ public class PeliculasCRUD {
         }
         return listPeli;
     }
-
-    public void createMovie(int id, String titulo, int anio, int puntuacion, String portada, String tipo, int categoria_id) {
-        String sql = "INSERT INTO pelicula (id, titulo, anio, puntuacion, portada, tipo, categoria_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void createMovie(String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
+        String sql = "INSERT INTO pelicula (titulo, anio, puntuacion, portada, tipo, categoria_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url, user, password);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, titulo);
-            preparedStatement.setInt(3, anio);
-            preparedStatement.setInt(4, puntuacion);
-            preparedStatement.setString(5, portada);
-            preparedStatement.setString(6, tipo);
-            preparedStatement.setInt(7, categoria_id);
+            preparedStatement.setString(1, titulo);
+            preparedStatement.setInt(2, anio);
+            preparedStatement.setInt(3, puntuacion);
+            preparedStatement.setString(4, portada);
+            preparedStatement.setString(5, tipo);
+            preparedStatement.setString(6, categoria);
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -62,25 +59,26 @@ public class PeliculasCRUD {
         }
     }
 
-    public void updateMovie(int id, String titulo, int anio, int puntuacion, String portada, String tipo, int categoria_id) {
+    public void updateMovie(int id, String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
+        // SQL statement para actualizar película
         String sql = "UPDATE pelicula SET titulo = ?, anio = ?, puntuacion = ?, portada = ?, tipo = ?, categoria_id = ? WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url, user, password);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            // Establecer los parámetros del PreparedStatement
             preparedStatement.setString(1, titulo);
             preparedStatement.setInt(2, anio);
             preparedStatement.setInt(3, puntuacion);
             preparedStatement.setString(4, portada);
             preparedStatement.setString(5, tipo);
-            preparedStatement.setInt(6, categoria_id);
-            preparedStatement.setInt(7, id);
-
+            preparedStatement.setString(6, categoria);
+    
+            // Ejecutar la actualización
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Edición realizada");
             } else {
                 System.out.println("No se encontró ninguna película con el ID especificado");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -102,28 +100,30 @@ public class PeliculasCRUD {
             e.printStackTrace();
         }
     }
-
-    public Pelicula getPeliculaById(Integer id) {
-        Pelicula pelicula = null;
-        String sql = "SELECT * FROM pelicula WHERE id = ?";
-        try (Connection connection = DriverManager.getConnection(url, user, password);
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                int peliculaId = resultSet.getInt("id");
-                String titulo = resultSet.getString("titulo");
-                int anio = resultSet.getInt("anio");
-                int puntuacion = resultSet.getInt("puntuacion");
-                String portada = resultSet.getString("portada");
-                String tipo = resultSet.getString("tipo");
-                int categoriaId = resultSet.getInt("categoria_id");
-
-                pelicula = new Pelicula(peliculaId, titulo, anio, puntuacion, portada, tipo, categoriaId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return pelicula;
+    
     }
-}
+
+    // public Pelicula getPeliculaById(Integer id) {
+    //     Pelicula pelicula = null;
+    //     String sql = "SELECT * FROM pelicula WHERE id = ?";
+    //     try (Connection connection = DriverManager.getConnection(url, user, password);
+    //          PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+    //         preparedStatement.setInt(1, id);
+    //         ResultSet resultSet = preparedStatement.executeQuery();
+    //         if (resultSet.next()) {
+    //             int peliculaId = resultSet.getInt("id");
+    //             String titulo = resultSet.getString("titulo");
+    //             int anio = resultSet.getInt("anio");
+    //             int puntuacion = resultSet.getInt("puntuacion");
+    //             String portada = resultSet.getString("portada");
+    //             String tipo = resultSet.getString("tipo");
+    //             int categoria = resultSet.getString("categoria");
+
+    //             pelicula = new Pelicula(peliculaId, titulo, anio, puntuacion, portada, tipo, categoria);
+    //         }
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    //     return pelicula;
+    // }
+

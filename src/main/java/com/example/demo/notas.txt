@@ -7,7 +7,7 @@ http://localhost:8080/peliculas/delete/2 // Delete
 Como levantar spring boot:
 mvn spring-boot:run
 
-TABLA DE RELACIONES:
+TABLA DE RELACIONES: (Ver despues porque no se genero, se realiza fetch para las relaciones)
 La tabla para que peliculas se relacione con la tabla de categorias: (en pelicula categoria_id)
 SELECT p.id, p.titulo, p.anio, p.puntuacion, p.portada, p.tipo, c.nombre AS categoria
 FROM pelicula p

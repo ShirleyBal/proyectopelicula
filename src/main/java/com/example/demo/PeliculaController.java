@@ -33,41 +33,53 @@ public class PeliculaController {
     }
 
     // Endpoint para obtener una película por su ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Pelicula> getPeliculaById(@PathVariable("id") Integer id) {
-        try {
-            Pelicula pelicula = peliculasCRUD.getPeliculaById(id);
-            if (pelicula != null) {
-                return new ResponseEntity<>(pelicula, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    // @GetMapping("/{id}")
+    // public ResponseEntity<Pelicula> getPeliculaById(@PathVariable("id") Integer id) {
+    //     try {
+    //         Pelicula pelicula = peliculasCRUD.getPeliculaById(id);
+    //         if (pelicula != null) {
+    //             return new ResponseEntity<>(pelicula, HttpStatus.OK);
+    //         } else {
+    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
 
     // Endpoint para crear una nueva película
-    @PostMapping("/create")
-    public ResponseEntity<Void> createMovie(@RequestBody Pelicula pelicula) {
-        try {
-            peliculasCRUD.createMovie(pelicula.getId(), pelicula.getTitulo(), pelicula.getAnio(),
-                    pelicula.getPuntuacion(), pelicula.getPortada(), pelicula.getTipo(), pelicula.getCategoriaId());
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    // @PostMapping("/create")
+    // public ResponseEntity<Void> createMovie(@RequestBody Pelicula pelicula) {
+    //     try {
+    //         peliculasCRUD.createMovie(pelicula.getId(), pelicula.getTitulo(), pelicula.getAnio(),
+    //                 pelicula.getPuntuacion(), pelicula.getPortada(), pelicula.getTipo(), pelicula.getCategoriaId());
+    //         return new ResponseEntity<>(HttpStatus.CREATED);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
+
+     // Endpoint para crear 
+     @PostMapping("/addPelicula")
+     public ResponseEntity<Void> createMovie(@RequestBody Pelicula pelicula) {
+         try {
+             peliculasCRUD.createMovie(pelicula.getTitulo(), pelicula.getAnio(),
+                     pelicula.getPuntuacion(), pelicula.getPortada(), pelicula.getTipo(), pelicula.getCategoria());
+             return new ResponseEntity<>(HttpStatus.CREATED);
+         } catch (Exception e) {
+             e.printStackTrace();
+             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+     }
 
     // Endpoint para actualizar una película existente
-    @PutMapping("/update/{id}")
     public ResponseEntity<Pelicula> updateMovie(@PathVariable("id") Integer id, @RequestBody Pelicula pelicula) {
         try {
-            pelicula.setId(id); // Asignamos el ID recibido al objeto Pelicula
+            pelicula.setId(id); // Asignamos el id auto
             peliculasCRUD.updateMovie(pelicula.getId(), pelicula.getTitulo(), pelicula.getAnio(),
-                    pelicula.getPuntuacion(), pelicula.getPortada(), pelicula.getTipo(), pelicula.getCategoriaId());
+                    pelicula.getPuntuacion(), pelicula.getPortada(), pelicula.getTipo(), pelicula.getCategoria());
             return new ResponseEntity<>(pelicula, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,16 +89,13 @@ public class PeliculaController {
 
     // Endpoint para eliminar una película por su ID
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable("id") Integer id) {
-        try {
-            peliculasCRUD.deleteMovie(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Void> deletePelicula(@PathVariable int id) {
+        PeliculasCRUD peliculasCRUD = new PeliculasCRUD();
+        peliculasCRUD.deleteMovie(id);
+        return ResponseEntity.noContent().build();
     }
 }
+
 
 ////////////////////
 // package com.example.demo;

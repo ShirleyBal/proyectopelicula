@@ -11,20 +11,20 @@ public class Pelicula {
     private int puntuacion;
     private String portada;
     private String tipo;
-    private int categoriaId;
+    private String categoria;
 
     // Constructor vacío requerido por JPA
     //Constructor vacío: Este es requerido por JPA para crear instancias de la entidad.
     //Constructor completo: Este constructor incluye todos los atributos, incluido el id.
     //Constructor sin id: Este es útil cuando deseas crear una nueva película sin especificar el id, ya que este será generado automáticamente.
-    public Pelicula(int id, String titulo, int anio, int puntuacion, String portada, String tipo, int categoriaId) {
+    public Pelicula(int id, String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
         this.id = id;
         this.titulo = titulo;
         this.anio = anio;
         this.puntuacion = puntuacion;
         this.portada = portada;
         this.tipo = tipo;
-        this.categoriaId = categoriaId;
+        this.categoria = categoria;
     }
 
     /**
@@ -34,16 +34,16 @@ public class Pelicula {
      * @param puntuacion
      * @param portada
      * @param tipo
-     * @param categoriaId
+     * @param categoria
      */
 
-    public Pelicula(String titulo, int anio, int puntuacion, String portada, String tipo, int categoriaId) {
+    public Pelicula(String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
         this.titulo = titulo;
         this.anio = anio;
         this.puntuacion = puntuacion;
         this.portada = portada;
         this.tipo = tipo;
-        this.categoriaId = categoriaId;
+        this.categoria = categoria;
     }
 
     // Getters y Setters
@@ -100,11 +100,11 @@ public class Pelicula {
         this.tipo = tipo;
     }
 
-    public int getCategoriaId() {
-        return categoriaId;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriaId(int categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
