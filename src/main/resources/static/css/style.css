@@ -83,35 +83,26 @@ body {
 }
 
 /* Botones */
-.btn-trash {
-    background-image: url('../img/contenedor-de-basura.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+.btn-trash, .btn-edit, .btn-add {
     width: 30px;  /* Ajusta el tamaño según tus necesidades */
     height: 30px; /* Ajusta el tamaño según tus necesidades */
     border: none; /* Elimina el borde predeterminado del botón */
     cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+/* Botones */
+.btn-trash {
+    background-image: url('../img/contenedor-de-basura.png');
 }
 
 .btn-edit {
     background-image: url('../img/signo-editar.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 30px;  /* Ajusta el tamaño según tus necesidades */
-    height: 30px; /* Ajusta el tamaño según tus necesidades */
-    border: none; /* Elimina el borde predeterminado del botón */
-    cursor: pointer;
 }
 
 .btn-add {
     background-image: url('../img/addsignomas.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 30px;  /* Ajusta el tamaño según tus necesidades */
-    height: 30px; /* Ajusta el tamaño según tus necesidades */
-    border: none; /* Elimina el borde predeterminado del botón */
-    cursor: pointer;
 }

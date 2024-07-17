@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-
 /**
  * Objeto que representa una fila de la tabla Películas.
  */
@@ -13,10 +12,10 @@ public class Pelicula {
     private String tipo;
     private String categoria;
 
-    // Constructor vacío requerido por JPA
-    //Constructor vacío: Este es requerido por JPA para crear instancias de la entidad.
-    //Constructor completo: Este constructor incluye todos los atributos, incluido el id.
-    //Constructor sin id: Este es útil cuando deseas crear una nueva película sin especificar el id, ya que este será generado automáticamente.
+    // Constructor por defecto
+    public Pelicula() {}
+
+    // Constructor completo
     public Pelicula(int id, String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
         this.id = id;
         this.titulo = titulo;
@@ -27,16 +26,7 @@ public class Pelicula {
         this.categoria = categoria;
     }
 
-    /**
-     * Constructor que solo recibe 3 parámetros
-     * @param titulo
-     * @param anio
-     * @param puntuacion
-     * @param portada
-     * @param tipo
-     * @param categoria
-     */
-
+    // Constructor sin id
     public Pelicula(String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
         this.titulo = titulo;
         this.anio = anio;
@@ -46,12 +36,7 @@ public class Pelicula {
         this.categoria = categoria;
     }
 
-    // Getters y Setters
-
-    public Pelicula(Integer id) {
-        this.id = id;
-    }
-    
+    // Getters y setters
     public int getId() {
         return id;
     }

@@ -18,6 +18,7 @@
         </div>
         <!-- Mensaje de resultado de operaciones -->
         <div id="mensaje" class="alert" style="display: none;"></div>
+
         <table class="table">
             <thead>
                 <tr>
@@ -31,10 +32,99 @@
                 </tr>
             </thead>
             <tbody id="peliculas">
-        
+                <!-- Aquí se insertarán las filas de las películas -->
             </tbody>
         </table>
+    
     </div>
+
+    <!-- Form para agregar nueva película -->
+    <div class="modal fade" id="addPeliModal" tabindex="-1" aria-labelledby="addPeliModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPeliModalLabel">Agregar Película</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addPeliForm">
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="titulo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="anio" class="form-label">Año</label>
+                            <input type="number" class="form-control" id="anio" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="puntuacion" class="form-label">Puntuación</label>
+                            <input type="number" class="form-control" id="puntuacion" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="portada" class="form-label">Portada</label>
+                            <input type="text" class="form-control" id="portada" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipo" class="form-label">Tipo</label>
+                            <input type="text" class="form-control" id="tipo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoría</label>
+                            <input type="text" class="form-control" id="categoria" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar Película</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form para editar una pelicula -->
+    <!-- Form para editar una pelicula -->
+<div class="modal fade" id="editPeliModal" tabindex="-1" aria-labelledby="editPeliModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPeliModalLabel">Editar Película</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editPeliForm">
+                <div class="modal-body">
+                    <input type="hidden" id="editPeliId" name="editPeliId">
+                    <div class="mb-3">
+                        <label for="editTitulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="editTitulo" name="editTitulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAnio" class="form-label">Año</label>
+                        <input type="number" class="form-control" id="editAnio" name="editAnio" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPuntuacion" class="form-label">Puntuación</label>
+                        <input type="number" class="form-control" id="editPuntuacion" name="editPuntuacion" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPortada" class="form-label">Portada</label>
+                        <input type="text" class="form-control" id="editPortada" name="editPortada" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTipo" class="form-label">Tipo</label>
+                        <input type="text" class="form-control" id="editTipo" name="editTipo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategoria" class="form-label">Categoría</label>
+                        <input type="text" class="form-control" id="editCategoria" name="editCategoria" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="pelis.js"></script>

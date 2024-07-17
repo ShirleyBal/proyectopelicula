@@ -39,32 +39,9 @@ public class PeliculasCRUD {
         return listPeli;
     }
     public void createMovie(String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
-        String sql = "INSERT INTO pelicula (titulo, anio, puntuacion, portada, tipo, categoria_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pelicula (titulo, anio, puntuacion, portada, tipo, categoria) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url, user, password);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, titulo);
-            preparedStatement.setInt(2, anio);
-            preparedStatement.setInt(3, puntuacion);
-            preparedStatement.setString(4, portada);
-            preparedStatement.setString(5, tipo);
-            preparedStatement.setString(6, categoria);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Pelicula creada");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateMovie(int id, String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
-        // SQL statement para actualizar película
-        String sql = "UPDATE pelicula SET titulo = ?, anio = ?, puntuacion = ?, portada = ?, tipo = ?, categoria_id = ? WHERE id = ?";
-        try (Connection connection = DriverManager.getConnection(url, user, password);
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            // Establecer los parámetros del PreparedStatement
             preparedStatement.setString(1, titulo);
             preparedStatement.setInt(2, anio);
             preparedStatement.setInt(3, puntuacion);
@@ -72,7 +49,26 @@ public class PeliculasCRUD {
             preparedStatement.setString(5, tipo);
             preparedStatement.setString(6, categoria);
     
-            // Ejecutar la actualización
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Pelicula creada");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateMovie(int id, String titulo, int anio, int puntuacion, String portada, String tipo, String categoria) {
+        String sql = "UPDATE pelicula SET titulo = ?, anio = ?, puntuacion = ?, portada = ?, tipo = ?, categoria = ? WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection(url, user, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, titulo);
+            preparedStatement.setInt(2, anio);
+            preparedStatement.setInt(3, puntuacion);
+            preparedStatement.setString(4, portada);
+            preparedStatement.setString(5, tipo);
+            preparedStatement.setString(6, categoria);
+            preparedStatement.setInt(7, id); // Asegúrate de pasar el id como parámetro
+    
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Edición realizada");
@@ -83,6 +79,7 @@ public class PeliculasCRUD {
             e.printStackTrace();
         }
     }
+    
 
     public void deleteMovie(int id) {
         String sql = "DELETE FROM pelicula WHERE id = ?";
@@ -111,7 +108,6 @@ public class PeliculasCRUD {
     //         preparedStatement.setInt(1, id);
     //         ResultSet resultSet = preparedStatement.executeQuery();
     //         if (resultSet.next()) {
-    //             int peliculaId = resultSet.getInt("id");
     //             String titulo = resultSet.getString("titulo");
     //             int anio = resultSet.getInt("anio");
     //             int puntuacion = resultSet.getInt("puntuacion");
